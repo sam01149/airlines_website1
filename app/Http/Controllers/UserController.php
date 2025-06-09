@@ -30,20 +30,19 @@ class UserController extends Controller
             'password.required' => 'password harus terisi',
         ]);
         $infologin = [
-        'email'=>$request->email,
-        'password'=>$request->password
-    ];
-
-    if(Auth::attempt($infologin)){
-        // SUKSES
-        if (Auth::user()->is_admin) {
-            return redirect()->route('admin.dashboard')->with('success', 'Login sebagai Admin berhasil!');
+            'email'=>$request->email,
+            'password'=>$request->password
+        ];
+        if(Auth::attempt($infologin)){
+            //sukses
+            if (Auth::user()->is_admin) {
+                return redirect()->route('admin.dashboard')->with('success', 'Login sebagai Admin berhasil!');
+            }
+            return redirect('dashboard')->with('success', 'Login Berhasil');
         }
-        return redirect('dashboard')->with('success', 'Login Berhasil');
-    } else {
-        // GAGAL
-        return redirect('sesi')->withErrors(['login' => 'Email atau password salah']);
-    }
+        else{
+    //gagal
+        return redirect('sesi')->withErrors(['login' => 'error Email atau password salah']);
 }
     }
 
@@ -51,9 +50,12 @@ class UserController extends Controller
         Auth::logout();
         return redirect('sesi')->with('success', 'Logout Berhasil');
     }
+
+    // TAMBAHKAN FUNGSI INI
     function signup(){
         return view('sesi/signup');
     }
+    
     function create(Request $request){
          Session::flash('name', $request->name);
          Session::flash('email', $request->email);
@@ -88,4 +90,5 @@ class UserController extends Controller
     //gagal
         return redirect('sesi')->withErrors(['login' => 'error Email atau password salah']);
     }
+}
 }

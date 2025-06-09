@@ -29,11 +29,13 @@
         </div>
         <div class="menu-toggle" aria-label="Toggle menu" role="button" tabindex="0">&#9776;</div>
         <ul>
+            @guest
             <li style="margin-top:12px"><a href="/">Home</a></li>
+            @endguest
             <li style="margin-top:12px"><a href="/contact">Contact</a></li> {{-- Ubah ini --}}
             <li style="margin-top:12px"><a href="/faq">FAQ</a></li> {{-- Ubah ini --}}
-            <li style="margin-top:12px"><a href="#about">About</a></li>
-            <li style="margin-top:12px"><a href="#services">Services</a></li>
+            <li style="margin-top:12px"><a href="{{ route('about') }}">About</a></li>
+            <li style="margin-top:12px"><a href="{{ route('services') }}">Services</a></li>
             @auth
                 <li class="user-profile-nav">
                     <div class="user-profile" id="profileDropdownToggle">

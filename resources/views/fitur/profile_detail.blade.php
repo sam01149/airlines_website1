@@ -44,7 +44,7 @@
         <div class="profile-actions">
             {{-- Tombol Edit Profil akan membutuhkan form dan route POST untuk update --}}
             {{-- <a href="#" class="button edit-profile-btn">Edit Profil</a> --}}
-            <a href="/dashboard" class="button back-to-dashboard-btn">Kembali ke Dashboard</a>
+            <a style="background-color: #ffd54f;color:black;" href="/dashboard" class="button back-to-dashboard-btn">Kembali ke Dashboard</a>
         </div>
     </div>
 </main>

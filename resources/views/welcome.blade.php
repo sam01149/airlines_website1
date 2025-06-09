@@ -35,8 +35,8 @@
             <li><a href="/">Home</a></li>
             <li><a href="/contact">Contact</a></li> {{-- Ubah ini --}}
             <li><a href="/faq">FAQ</a></li> {{-- Ubah ini --}}
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="{{ route('about') }}">About</a></li>
+            <li><a href="{{ route('services') }}">Services</a></li>
             <li><a href="/sesi/signup">Daftar</a></li>
             <li><a href="/sesi">Login</a></li>
         </ul>

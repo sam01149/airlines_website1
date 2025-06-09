@@ -9,12 +9,15 @@
 }
 
 body {
+    
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #3a8dff, #00c6ff);
     color: #fff;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    
+    
 }
 
 /* Navbar styles */
@@ -336,7 +339,7 @@ footer {
 }
 
 .form-group label {
-    display: block;
+    
     margin-bottom: 0.8rem;
     font-weight: 500;
     color: #e0e7ff;
@@ -449,15 +452,32 @@ footer {
     max-width: 1200px;
     width: 100%;
     margin: 2rem auto;
-    background: rgba(0, 0, 0, 0.7); /* Background overlay */
-    background-image: url('../images/dashboard_bg.jpg'); /* Ganti dengan path gambar Anda */
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: overlay; /* Membuat overlay transparan */
+    /* GANTI DENGAN GAMBAR PESAWAT ANDA */
+    
+    position: relative; /* Diperlukan untuk overlay */
     padding: 3rem;
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     text-align: center;
+}
+
+/* Tambahkan ini untuk membuat lapisan gelap agar teks mudah dibaca */
+.dashboard-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Atur kegelapan di sini */
+    border-radius: 15px; /* Sesuaikan dengan parent */
+    z-index: 1;
+}
+
+/* Pastikan konten di atas overlay */
+.dashboard-container > * {
+    position: relative;
+    z-index: 2;
 }
 .dashboard-container h1, .dashboard-container p, .feature-card h2, .feature-card p {
     color: #fff; /* Pastikan teks putih */

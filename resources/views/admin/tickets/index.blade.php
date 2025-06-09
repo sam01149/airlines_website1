@@ -55,12 +55,13 @@
                             <td><span class="ticket-status status-{{ Str::slug($ticket->status) }}">{{ $ticket->status }}</span></td>
                             <td>{{ $ticket->seat_number ?? '-' }}</td>
                             <td>
-                                <a href="{{ route('admin.tickets.edit', $ticket->id) }}" class="button small-button" style="background-color: #007bff;">Edit</a>
+                                <a href="{{ route('admin.tickets.edit', $ticket->id) }}" class="button small-button" style="background-color: #007bff;color:white;padding:0.5rem 1rem;border-radius:20px">Edit</a>
+                                <br><br>
                                 <form action="{{ route('admin.tickets.destroy', $ticket->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="button small-button" style="background-color: #dc3545;" onclick="return confirm('Anda yakin ingin menghapus tiket ini?');">Hapus</button>
-                                </form>
+    @csrf
+    @method('DELETE')
+                                <button type="submit" class="button small-button" style="background-color: #dc3545;padding:0.5rem 1rem;border-radius:20px;color:black;" onclick="return confirm('Anda yakin ingin menghapus tiket ini?');">Hapus</button>
+                        </form>
                             </td>
                         </tr>
                     @endforeach
@@ -69,7 +70,7 @@
         </div>
     @endif
     <div style="text-align: center; margin-top: 30px;">
-        <a href="/dashboard" class="button" style="background-color: #555; width: auto; padding: 12px 30px;">Kembali ke Dashboard</a>
+       <a href="{{ route('admin.dashboard') }}" class="button"  style="background-color:rgb(220, 181, 66);border-radius:30px;color:black; width: auto; padding: 12px 30px;">Kembali ke Dashboard Admin</a>
     </div>
 </main>
 <style>

@@ -19,6 +19,15 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('welcome');
 });
+Route::get('/admin', 'admin@index');
+// Tambahkan di luar grup autentikasi (karena biasanya publik)
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
 
 // Rute Autentikasi
 Route::get('/sesi', [UserController::class, 'index'])->name('login'); // Beri nama rute login
@@ -88,7 +97,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/tickets/{ticket}', [AdminTicketController::class, 'destroy'])->name('admin.tickets.destroy');
 
         // Rute Admin untuk Voucher
-        Route::get('/admin/vouchers', [SpecialOfferController::class, 'index'])->name('admin.vouchers.index'); // Admin bisa melihat semua voucher, aktif/tidak aktif
+        // Ganti 'index' menjadi 'adminIndex'
+        Route::get('/admin/vouchers', [SpecialOfferController::class, 'adminIndex'])->name('admin.vouchers.index'); // Admin bisa melihat semua voucher, aktif/tidak aktif
         Route::get('/admin/vouchers/create', [SpecialOfferController::class, 'create'])->name('admin.vouchers.create');
         Route::post('/admin/vouchers', [SpecialOfferController::class, 'store'])->name('admin.vouchers.store');
         Route::get('/admin/vouchers/{voucher}/edit', [SpecialOfferController::class, 'edit'])->name('admin.vouchers.edit');

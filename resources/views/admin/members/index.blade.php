@@ -4,7 +4,7 @@
 
 @section('content')
 <main class="dashboard-container" style="max-width: 1000px;">
-    <h1>Kelola Data Anggota</h1>
+    <h1>Kelola Data Pengguna</h1>
     <p style="font-size: 1.1rem; color: #e0e7ff; margin-bottom: 2.5rem;">Lihat, edit, atau hapus data anggota terdaftar.</p>
 
     @if (session('success'))
@@ -47,7 +47,7 @@
                             <td>{{ $member->email }}</td>
                             <td>{{ \Carbon\Carbon::parse($member->created_at)->format('d M Y H:i') }}</td>
                             <td>
-                                <a href="{{ route('admin.members.edit', $member->id) }}" class="button small-button" style="background-color: #007bff;">Edit</a>
+                                <a href="{{ route('admin.members.edit', $member->id) }}" class="button small-button" style="background-color: #007bff;color:white;">Edit</a>
                                 <form action="{{ route('admin.members.destroy', $member->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
@@ -61,7 +61,7 @@
         </div>
     @endif
     <div style="text-align: center; margin-top: 30px;">
-        <a href="/dashboard" class="button" style="background-color: #555; width: auto; padding: 12px 30px;">Kembali ke Dashboard</a>
+        <a href="{{ route('admin.dashboard') }}" class="button"  style="background-color:rgb(220, 181, 66);border-radius:30px;color:black; width: auto; padding: 12px 30px;">Kembali ke Dashboard Admin</a>
     </div>
 </main>
 <style>

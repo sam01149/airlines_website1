@@ -26,9 +26,7 @@ class CheckinController extends Controller
         $ticket = PemesananTiket::where('id', $id)
                                 ->where('user_id', Auth::id())
                                 ->firstOrFail();
-        if ($ticket->status == 'checked-in') {
-            return redirect('/my-tickets')->withErrors(['checkin_error' => 'Tiket ini sudah di-check-in.']);
-        }
+        
         return view('fitur.checkin.ticket_detail', compact('ticket'));
     }
 
@@ -79,9 +77,7 @@ class CheckinController extends Controller
                                 ->where('user_id', Auth::id())
                                 ->firstOrFail();
 
-        if ($ticket->status == 'checked-in') {
-            return back()->withErrors(['checkin_error' => 'Tiket ini sudah di-check-in.']);
-        }
+        
 
         // Periksa apakah kursi sudah dipilih oleh orang lain (double check)
         $isSeatReserved = PemesananTiket::where('tanggal_pemesanan', $ticket->tanggal_pemesanan)

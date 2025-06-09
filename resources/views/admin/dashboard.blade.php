@@ -5,7 +5,7 @@
 @section('content')
 <main class="dashboard-container">
     <h1>Admin Dashboard</h1>
-    <p style="font-size: 1.1rem; color: #e0e7ff; margin-bottom: 2.5rem;">Selamat datang, Admin {{ Auth::user()->name }}. Kelola sistem dari sini.</p>
+    <p style="font-size: 1.1rem; color: #e0e7ff; margin-bottom: 2.5rem;">Selamat datang {{ Auth::user()->name }}. anda dapat mengelola sistem dari sini.</p>
 
     <div class="features-grid">
         <div class="feature-card">

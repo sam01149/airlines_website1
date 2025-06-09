@@ -57,9 +57,14 @@
     </div>
 
     <div style="text-align: center; margin-top: 30px;">
-        <a href="{{ route('checkin.seat_selection', $ticket->id) }}" class="form-submit-button" style="width: auto; padding: 12px 30px;">Konfirmasi dan Lanjut Pemilihan Kursi</a>
-        <a href="/check-in-list" class="button" style="background-color: #555; margin-left: 10px; width: auto; padding: 12px 30px;">Kembali</a>
-    </div>
+    @if ($ticket->status == 'belum check-in')
+        <a href="{{ route('checkin.seat_selection', $ticket->id) }}" class="form-submit-button" style="width: auto; padding: 12px 30px; text-decoration: none;">Lanjut ke Pemilihan Kursi</a>
+    @else
+        <p style="color: #6bff6b; font-size: 1.1rem;">Anda sudah berhasil check-in untuk penerbangan ini.</p>
+    @endif
+
+    <a href="{{ route('my.tickets') }}" class="button" style="background-color: #ffd54f;padding: 12px 30px;border-radius:20px; color: black; text-decoration: none; margin-top: 15px; display: inline-block;">Kembali ke Daftar Tiket Saya</a>
+</div>
 </main>
 
 <style>

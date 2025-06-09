@@ -43,10 +43,12 @@
                             <p><strong>Kursi:</strong> {{ $ticket->seat_number }}</p>
                         @endif
                     </div>
-                    <div class="ticket-footer">
-                        <a style="color:white;"href="{{ route('ticket.detail', $ticket->id) }}" class="button">Lihat Detail Tiket</a>
+                    <div class="ticket-footer"style="display:grid;justify-items:end;">
+                        <a style="color:white; "href="{{ route('ticket.detail', $ticket->id) }}" class="button">Lihat Detail Tiket</a>
+
                         @if ($ticket->status == 'belum check-in')
-                            <a href="{{ route('checkin.detail', $ticket->id) }}" class="button" style="background-color: #007bff; margin-left: 10px;">Check-in</a>
+                        
+                            <a href="{{ route('checkin.detail', $ticket->id) }}" class="button" style="background-color: #ffd54f;color:black;; margin-left: 10px;">Check-in</a>
                         @endif
                     </div>
                 </div>
@@ -64,7 +66,7 @@
     
     .ticket-list-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        
         gap: 25px;
         margin-top: 30px;
     }

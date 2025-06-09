@@ -40,7 +40,9 @@
                         <p class="voucher-code-display" id="code-{{ $voucher->id }}">{{ $voucher->code }}</p>
                     </div>
                     <div class="voucher-footer">
-                        <button class="button copy-code-btn" data-clipboard-target="#code-{{ $voucher->id }}">Salin Kode</button>
+                        <button class="button copy-code-btn" data-clipboard-target="#code-{{ $voucher->id }}" style="background-color: #007bff;">
+                            <i class="fas fa-copy"></i> Salin Kode
+                        </button>
                     </div>
                 </div>
             @endforeach
@@ -48,7 +50,7 @@
     @endif
 
     <div style="text-align: center; margin-top: 30px;">
-        <a href="/dashboard" class="button" style="background-color: #555; width: auto; padding: 12px 30px;">Kembali ke Dashboard</a>
+        <a href="/dashboard" class="button" style="background-color: #ffd54f;color:black; width: auto; padding: 12px 30px;">Kembali ke Dashboard</a>
     </div>
 </main>
 

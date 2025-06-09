@@ -48,9 +48,29 @@
         </div>
 
         <div class="form-group checkbox-group">
-            <input type="checkbox" id="agreement" name="agreement" value="1" required>
-            <label for="agreement" style="display: inline; margin-left: 10px;">Saya telah membaca dan menyetujui <a href="#" class="link-text">perjanjian pembayaran</a>.</label>
+    <input type="checkbox" id="agreement" name="agreement" value="1" required>
+    <label for="agreement" style="display: inline; margin-left: 10px;">Saya telah membaca dan menyetujui <a href="javascript:void(0);" class="link-text" onclick="toggleAgreement()">perjanjian pembayaran</a>.</label>
+</div>
+
+        <div id="agreement-content" style="display: none; background-color: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 15px; color: #e0e7ff; max-height: 150px; overflow-y: auto;">
+            <h4>Syarat dan Ketentuan Pembayaran & Check-in</h4>
+            <p>1. Tiket yang sudah dibeli tidak dapat dibatalkan atau diuangkan kembali (non-refundable).</p>
+            <p>2. Perubahan jadwal tunduk pada kebijakan maskapai dan ketersediaan, serta dapat dikenakan biaya tambahan.</p>
+            <p>3. Penumpang bertanggung jawab penuh atas kebenaran data identitas (KTP/Paspor) yang dimasukkan.</p>
+            <p>4. Dengan melanjutkan check-in, Anda mengonfirmasi bahwa semua data penumpang dan detail penerbangan sudah benar.</p>
+            <p>5. Pemilihan kursi bersifat final setelah proses check-in selesai dan tidak dapat diubah.</p>
         </div>
+
+<script>
+    function toggleAgreement() {
+        var content = document.getElementById('agreement-content');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
+    }
+</script>
 
         <button type="submit" class="form-submit-button">Next (Lanjutkan Check-in)</button>
     </form>

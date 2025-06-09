@@ -11,10 +11,11 @@ class AdminMemberController extends Controller
 {
     // Menampilkan daftar semua anggota
     public function index()
-    {
-        $members = User::all();
-        return view('admin.members.index', compact('members'));
-    }
+{
+    // Ambil semua user yang BUKAN admin
+    $members = User::where('is_admin', false)->get();
+    return view('admin.members.index', compact('members'));
+}
 
     // Menampilkan form edit anggota
     public function edit(User $member)
