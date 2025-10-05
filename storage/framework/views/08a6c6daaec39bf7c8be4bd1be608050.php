@@ -1,0 +1,213 @@
+
+
+<?php $__env->startSection('title', 'Pilih Kursi Anda'); ?>
+
+<?php $__env->startSection('content'); ?>
+<main class="form-container" style="max-width: 800px;">
+    <h1>Pilih Kursi Anda</h1>
+    <p style="text-align: center; color: #e0e7ff; margin-bottom: 20px;">Pilih kursi yang tersedia. Kursi abu-abu sudah terisi.</p>
+
+    <?php if($errors->any()): ?>
+        <div class="alert-message error">
+            <ul>
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><?php echo e($error); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <div class="seat-map-container">
+        <div class="airplane-wing left-wing"></div>
+        <div class="airplane-fuselage">
+            <div class="row-label-container">
+                <?php
+                    $totalRows = 10; // Sesuaikan dengan controller
+                    $seatsPerRow = ['A', 'B', 'C', 'D', 'E', 'F']; // Sesuaikan dengan controller
+                ?>
+                <?php for($row = 1; $row <= $totalRows; $row++): ?>
+                    <div class="row-label"><?php echo e($row); ?></div>
+                <?php endfor; ?>
+            </div>
+            <div class="seat-grid">
+                <?php $__currentLoopData = $seats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $seatName => $isReserved): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="seat-item <?php echo e($isReserved ? 'reserved' : 'available'); ?>" data-seat="<?php echo e($seatName); ?>">
+                        <?php echo e($seatName); ?>
+
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        </div>
+        <div class="airplane-wing right-wing"></div>
+    </div>
+
+    <form action="<?php echo e(route('checkin.process', $ticket->id)); ?>" method="POST" id="checkin-form">
+        <?php echo csrf_field(); ?>
+        <div class="form-group" style="margin-top: 30px;">
+            <label for="selected_seat">Kursi Terpilih:</label>
+            <input type="text" id="selected_seat" name="seat_number" readonly required placeholder="Klik kursi di atas">
+        </div>
+
+        <div class="form-group checkbox-group">
+    <input type="checkbox" id="agreement" name="agreement" value="1" required>
+    <label for="agreement" style="display: inline; margin-left: 10px;">Saya telah membaca dan menyetujui <a href="javascript:void(0);" class="link-text" onclick="toggleAgreement()">perjanjian pembayaran</a>.</label>
+</div>
+
+        <div id="agreement-content" style="display: none; background-color: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 15px; color: #e0e7ff; max-height: 150px; overflow-y: auto;">
+            <h4>Syarat dan Ketentuan Pembayaran & Check-in</h4>
+            <p>1. Tiket yang sudah dibeli tidak dapat dibatalkan atau diuangkan kembali (non-refundable).</p>
+            <p>2. Perubahan jadwal tunduk pada kebijakan maskapai dan ketersediaan, serta dapat dikenakan biaya tambahan.</p>
+            <p>3. Penumpang bertanggung jawab penuh atas kebenaran data identitas (KTP/Paspor) yang dimasukkan.</p>
+            <p>4. Dengan melanjutkan check-in, Anda mengonfirmasi bahwa semua data penumpang dan detail penerbangan sudah benar.</p>
+            <p>5. Pemilihan kursi bersifat final setelah proses check-in selesai dan tidak dapat diubah.</p>
+        </div>
+
+<script>
+    function toggleAgreement() {
+        var content = document.getElementById('agreement-content');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
+    }
+</script>
+
+        <button type="submit" class="form-submit-button">Next (Lanjutkan Check-in)</button>
+    </form>
+</main>
+
+<style>
+    .seat-map-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 30px;
+        margin-top: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow-x: auto;
+    }
+
+    .airplane-fuselage {
+        display: flex;
+        border: 2px solid #555;
+        border-radius: 15px;
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.3);
+        position: relative;
+    }
+
+    .row-label-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Adjust based on seat-grid gap */
+        margin-right: 15px;
+        padding-top: 10px; /* Align with seats */
+    }
+
+    .row-label {
+        font-weight: bold;
+        color: #ffd54f;
+        width: 30px;
+        text-align: right;
+        line-height: 40px; /* Match seat item height */
+    }
+
+    .seat-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 50px); /* 6 columns (A-F), 50px width */
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .seat-item {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        user-select: none;
+    }
+
+    .seat-item.available {
+        background-color: #6bff6b;
+        color: #333;
+    }
+
+    .seat-item.available:hover {
+        background-color: #4CAF50;
+        transform: scale(1.05);
+    }
+
+    .seat-item.reserved {
+        background-color: #888;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .seat-item.selected {
+        background-color: #ffd54f;
+        color: #333;
+        border: 2px solid #fff;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        .seat-grid {
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        .seat-item {
+            width: 40px;
+            height: 40px;
+            font-size: 0.85rem;
+        }
+        .row-label {
+            line-height: 40px;
+        }
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const seatItems = document.querySelectorAll('.seat-item.available');
+        const selectedSeatInput = document.getElementById('selected_seat');
+        let currentSelectedSeat = null;
+
+        seatItems.forEach(seat => {
+            seat.addEventListener('click', () => {
+                if (seat.classList.contains('available')) {
+                    // Remove previous selection
+                    if (currentSelectedSeat) {
+                        currentSelectedSeat.classList.remove('selected');
+                    }
+
+                    // Add new selection
+                    seat.classList.add('selected');
+                    selectedSeatInput.value = seat.dataset.seat;
+                    currentSelectedSeat = seat;
+                }
+            });
+        });
+    });
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\sam\Documents\File_Coding\HTML_CSS_JAVASCRIPT_dan_GAMBAR\Kuliah\airlines\resources\views/fitur/checkin/seat_selection.blade.php ENDPATH**/ ?>
